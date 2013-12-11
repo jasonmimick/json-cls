@@ -7,6 +7,13 @@ XData UrlMap
   </Routes>
 }
 
+Parameter ActionHeader = "X_HTTP_ACTION";
+
+Parameter DebugHeader = "X_HTTP_DEBUG";
+
+Parameter FireForgetHeader= "X_HTTP_DONOT_FIREANDFORGET";
+
+Parameter SessionIdHeader = "X_HTTP_SESSION";
 ClassMethod dbg() [ CodeMode = expression ] 
 {
   $get(^||debug)
@@ -23,7 +30,9 @@ ClassMethod debug(message... as %String) {
 ClassMethod ConvertJSONtoCLS(className As %String) As %Status
 {
   try {
-    set ^||debug=$get(%request.CgiEnvs("HTTP_X_DEBUG"),0)
+    set ^||debug=($get(%request.CgiEnvs(..#DebugHeader),0)'=0)
+	set ^||action=$get(%request.CgiEnvs(..#ActionHeader),"")
+	set ^||fireForget=($get(%request.CgiEnvs(..#FireForgetHeader),0)'=0)
     do ..debug("json2cls DEBUG ON",$c(13,10),"className=",className," Content-Size=",%request.Content.Size)
     set jStream=%request.Content
     do ##class(jsoncls.Generator).Generate(className,jStream)
