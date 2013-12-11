@@ -32,13 +32,19 @@ ClassMethod gen(className As %String, jsonSource as %RegisteredObject) [ Private
  } else {
      set jStream=jsonSource
  }
+ zw jStream
+ set foo=""
+ do jStream.Rewind()
+ while ( 'jStream.AtEnd ) { set foo = foo _ jStream.Read() }
+ do jStream.Rewind()
+ zw foo
  // Convert to %ZEN.proxyObject
  $$$THROWONERROR(sc,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(jStream,,.jP))
 
  // Generate class   
- //zw jP
- //do jP.%CopyToArray(.jA)
- //zw jA
+ zw jP
+ do jP.%CopyToArray(.jA)
+ zw jA
  do ..genCls(className,jP)
 
 }

@@ -1,0 +1,500 @@
+   90  more ~?ph
+   91  more ~/phase-dance.sh 
+   92  ssh -i ~/truenorth-ubuntu.pem ubuntu@54.235.106.61
+   93  ssh -i ~/truenorth-ubuntu.pem ubuntu@54.235.106.61
+   94  cs shed
+   95  cd shed
+   96  vimdiff shed.Server.cls x.shed.Server.cls 
+   97  cd ~
+   98  vim .vimrc
+   99  more .vimrc.bundles
+  100  ls .vim
+  101  ls .vim/bundle/
+  102  grep colorscheme *.vim*
+  103  grep color *.vim*
+  104  cd shed
+  105  vimdiff shed.Server.cls x.shed.Server.cls 
+  106  ls
+  107  rm shed.Server.cls 
+  108  mv x.shed.Server.cls shed.Server.cls 
+  109  git status
+  110  git commit -a -m "updates to shed.Server"
+  111  history | grep git push
+  112  history | grep git 
+  113  git push -u origin master
+  114  cp shed.Server.cls x.shed.Server.cls
+  115  git pull
+  116  vimdiff shed.Server.cls x.shed.Server.cls 
+  117  diff shed.Server.cls x.shed.Server.cls 
+  118  ls
+  119  more deploy-shed.sh 
+  120  make
+  121  echo $PATH
+  122  ls /usr/local/bin
+  123  ls -l /usr/local/bin
+  124  make install
+  125  vim makefile
+  126  ls
+  127  vim shed.sh
+  128  ls -l
+  129  chmod +x shed.sh 
+  130  make install
+  131  more makefile 
+  132  vim makefile 
+  133  make install
+  134  vim makefile 
+  135  make install
+  136  shed
+  137  ls -l /usr/local/shed
+  138  ls -l /usr/local/bin
+  139  shed
+  140  make clean
+  141  ls -l /usr/local/bin
+  142  vim makefile 
+  143  make install
+  144  ls -l /usr/local/bin
+  145  shed
+  146  make clean
+  147  shed
+  148  ls -l /usr/local/bin
+  149  shed
+  150  vim deploy-shed.sh 
+  151  history | grep deploy-shed
+  152  ./deploy-shed.sh 
+  153  ./deploy-shed.sh --help
+  154  ./deploy-shed.sh help
+  155  ps -ef | grep cache
+  156  ls ~/caches/
+  157  sudo ~/caches/hsf2012/cstop
+  158  ls
+  159  vim README.md 
+  160  vim shed.sh 
+  161  git status
+  162  git add test.sh 
+  163  ls
+  164  rmdir test
+  165  more test.sh 
+  166  ls
+  167  git status
+  168  git commit -a -m "new shell developer tool"
+  169  git push origin master
+  170  git pull
+  171  git status
+  172  history | grep 'git pull'
+  173  git help pull
+  174  git config
+  175  git config -l
+  176  git pull
+  177  git pull remote master
+  178  git pull master
+  179  git fetch
+  180  history | grep 'git push'
+  181  git push -u origin master
+  182  git push origin master
+  183  git remote
+  184  git fetch master
+  185  git push
+  186  git --force push origin master
+  187  git push --force origin master
+  188  vim README.md 
+  189  git status
+  190  git commit -a -m "Fix up README a bit"
+  191  git push origin master
+  192  scp /Users/jmimick/Downloads/SE_Keys_2014/InterSystems\ Sales\ Engineers_HealthShare\ AP_Enterprise_64_Platform\ Independent.ISCkey jmimick@54.235.106.61:~
+  193  vim shed.sh 
+  194  shed config
+  195  make install
+  196  shed
+  197  shed config
+  198  shed --namespace samples --format xml Sample.Person.cls
+  199  shed --namespace samples --format xml get Sample.Person.cls
+  200  git status
+  201  git commit -a -m "
+  202  adding xml format option
+  203  git commit -a -m "adding xml format option"
+  204  git push origin master
+  205  shed --namespace %25sys --format xml get shed.Server.cls
+  206  shed --namespace samples --format xml get Sample.Person.cls
+  207  shed -v --namespace samples --format xml get Sample.Person.cls
+  208  shed -v --namespace samples --format xml get Sample.Person.cls | more
+  209  ls
+  210  pwd
+  211  vim shed.Server.cls 
+  212  shed -v --namespace samples --format xml get Sample.Person.cls | more
+  213  shed -v --namespace samples --format xml get Sample.Person.cls | more
+  214  shed -v --namespace samples --format xml get Sample.Person.cls | more
+  215  history
+  216  git statua
+  217  git status
+  218  shed config
+  219  shed -ns %25sys get shed.Server.cls > shed.Server.cls
+  220  vim shed.Server.cls 
+  221  git status
+  222  git commit -a -m "enable application/xml for GET"
+  223  git push origin master
+  224  shed foo that doo
+  225  shed get doo
+  226  shed get foo.do
+  227  git status
+  228  vim shed.sh 
+  229  git status
+  230  git commit -a -m "Try global git config if not in local"
+  231  git push origin master
+  232  vim shed.Server.cls 
+  233  vim README.md 
+  234  shed config
+  235  git config --local --unset shed.user;2A
+  236  shed config
+  237  git config --global --add shed.user _system
+  238  shed config
+  239  git config --local --unset shed.server
+  240  git config --local --add shed.server sandbox.healthshare.us:57772
+  241  shed config
+  242  vim shed.sh 
+  243  git config 
+  244  git config --get-all shed
+  245  git config --get-all shed.*
+  246  git config --get-regexp shed.*
+  247  git config --get-regexp shed
+  248  more .git/config 
+  249  git config --get shed.user
+  250  vim shed.sh
+  251  shed config
+  252  grep WARN shed.sh 
+  253  vim shed.sh 
+  254  git status
+  255  git diff shed.Server.cls 
+  256  git commit -a -m "shed.sh use local/global/system git config, update README, more xml support for server"
+  257  git push origin master
+  258  vim shed.Server.cls 
+  259  shed config
+  260  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed
+  261  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed
+  262  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed/
+  263  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/passwd/jasonmimick/shed/jmimick@gmail.com/isabella2369
+  264  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed/
+  265  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/shed.Server.cls | more
+  266  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/shed.Server.cls > x.shed.Server.cls
+  267  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/shed.Server.cls > x.shed.Server.cls
+  268  diff shed.Server.cls x.shed.Server.cls 
+  269  rm x.shed.Server.cls 
+  270  history
+  271  vim shed.Server.cls 
+  272  git status
+  273  vim README.md 
+  274  vim README.md 
+  275  history
+  276  git commit -a -m "use custom headers for git pull"
+  277  git push origin master
+  278  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed/
+  279  vim shed.Server.cls 
+  280  git commit -a -m "use custom headers for git pull"
+  281  git push origin master
+  282  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed/
+  283  curl -v -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/json-cls
+  284  curl -v -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/json-cls/
+  285  curl -v -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/json-cls/
+  286  curl -v -H "X-Shed-Debug:1" -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/json-cls/
+  287  curl -v -H "X-Shed-Debug:1" -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/ensdemo/git/pull/jasonmimick/json-cls/
+  288  vim shed.Server.cls 
+  289  git commit -a -m "add HTTP to customer headers"
+  290  git push origin master
+  291  curl -v -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/%25sys/git/pull/jasonmimick/shed/
+  292  curl -v -H "X-Shed-Debug:1" -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/ensdemo/git/pull/jasonmimick/json-cls/
+  293  curl -v -H "X-Shed-Debug:0" -H "X-Shed-Git-User:jmimick@gmail.com" -H "X-Shed-Git-Password:isabella2369" -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/ensdemo/git/pull/jasonmimick/json-cls/
+  294  vim shed.sh
+  295  shed gitpull foo 123 jimy
+  296  shed git-pull foo 123 jimy
+  297  vim shed.sh 
+  298  shed git-pull foo 123 jimy
+  299  vim shed.sh 
+  300  shed config
+  301  shed help
+  302  shed -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 json-cls
+  303  vim shed.sh 
+  304  shed -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 json-cls
+  305  vim shed.sh 
+  306  shed -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 json-cls
+  307  shed -v -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 json-cls
+  308  vim shed.sh 
+  309  shed -v -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 json-cls
+  310  history | grep git
+  311  shed -v -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 jasonmimick/json-cls
+  312  shed -v -ns ENSDEMO git-pull jmimick@gmail.com isabella2369 jasonmimick/json-cls/
+  313  vim shed.sh 
+  314  shed help
+  315  git status
+  316  git commit -a -m "Add git-pull to shed.sh, pass git credentials in HTTP headers"
+  317  git push origin master
+  318  vim README.md 
+  319  git commit -a -m "remove git/passwd from API, don't need anymore"
+  320  git push origin master
+  321  git config 
+  322  git config -l
+  323  git config --local --unset shed.password
+  324  git config -l
+  325  git config --global --unset shed.password
+  326  git config -l
+  327  shed -ns samples get Sample.*.cls
+  328  shed -ns samples get Sample.*.cls
+  329  read foo
+  330  echo foo
+  331  echo $foo
+  332  vim shed.sh 
+  333  shed -ns samples get Sample.*.cls
+  334  shed -v -ns samples get Sample.*.cls
+  335  shed -v -ns samples get Sample.*.cls
+  336  vim shed.sh 
+  337  shed -v -ns samples get Sample.*.cls
+  338  vim shed.sh 
+  339  vim shed.sh 
+  340  shed -v -ns samples get Sample.*.cls
+  341  shed -v -ns samples get Sample.*.cls
+  342  vim shed.sh 
+  343  shed -v -ns samples get Sample.*.cls
+  344  shed -f json -ns samples get Sample.*.cls
+  345  git config --global shed.password _SYS
+  346  shed -f json -ns samples get Sample.*.cls
+  347  shed -v -f json -ns samples get Sample.*.cls
+  348  git config -l
+  349  git config --global shed.password SYS
+  350  shed -v -f json -ns samples get Sample.*.cls
+  351  shed  f json -ns samples get Sample.*.cls
+  352  shed -f xml -ns samples get Sample.*.cls
+  353  shed -f xml -ns samples get Sample.*.cls
+  354  shed -v -f xml -ns samples get Sample.*.cls
+  355  vim shed.Server.cls 
+  356  git commit -a -m "fix bug in class list xml format"
+  357  git push origin master
+  358  history
+  359  shed -ns %25sys git-pull jmimick@gmail.com isabella2369 jasonmimick/shed
+  360  shed -v -f xml -ns samples get Sample.*.cls
+  361  vim shed.Server.cls 
+  362  git commit -a -m "fix bug in class list xml format"
+  363  git push origin master
+  364  shed -ns %25sys git-pull jmimick@gmail.com isabella2369 jasonmimick/shed
+  365  shed -v -f xml -ns samples get Sample.*.cls
+  366  shed -f xml -ns samples get Sample.*.cls
+  367  vim shed.Server.cls 
+  368  git commit -a -m "fix bug in class list xml format"
+  369  git push origin master
+  370  shed -ns %25sys git-pull jmimick@gmail.com isabella2369 jasonmimick/shed
+  371  curl -X POST http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook/
+  372  curl -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook/
+  373  ls
+  374  curl -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook
+  375  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook
+  376  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook/
+  377  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook/
+  378  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook
+  379  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/foo/git/hook
+  380  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/%25sys/git/hook
+  381  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/fff/git/hook
+  382  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/fff/git/hook/
+  383  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/gpp/git/hook/
+  384  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/shed/gpp/git/hook/
+  385  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/shed/gpp/git/hook
+  386  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/shed/user/git/hook
+  387  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/shed/user/git/hook
+  388  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook
+  389  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  390  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  391  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/git/hook
+  392  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/git/hook/
+  393  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  394  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  395  curl -v -X POST --data-binary @shed.sh http://sandbox.healthshare.us:57772/shed/user/git/hook/
+  396  curl -X GET http://sandbox.healthshare.us:57772/gitshed/user/git/hook
+  397  curl -X GET http://sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  398  curl -X GET http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  399  curl -v -X GET http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  400  curl -v -X GET http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  401  curl -v -X POST http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  402  curl -v -X POST http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  403  curl -v -X POST http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  404  curl -v -X POST http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  405  curl -v -X POST http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  406  curl -v -X POST http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  407  man curl
+  408  curl -v -X POST --anyauth http://sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  409  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  410  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  411  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  412  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/qwe
+  413  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  414  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  415  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  416  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook
+  417  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  418  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  419  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  420  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook
+  421  curl -v -X POST --anyauth http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  422  curl -v -X POST --anyauth -d "foo" http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  423  history | grep curl | grep json
+  424  history | grep curl | grep json-cls
+  425  curl -v -X POST --anyauth  "foo" http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  426  curl -v -X POST --anyau--data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  427  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/git/hook/
+  428  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  429  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  430  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  431  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  432  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook
+  433  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  434  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xgit/hook/
+  435  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/shed/user/xgit/hook/
+  436  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/shed/user/xgit/hook
+  437  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/shed/user/xxgit/hook
+  438  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xxgit/hook
+  439  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/user/xxgit/hook/
+  440  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/gitshed/githook
+  441  curl -v -X POST --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  442  ls
+  443  curl -v -X POST --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  444  curl -v -X POST --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  445  curl -v -X POST --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  446  curl -v -X POST -H "Content-Type:text/plain" --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  447  curl -v -X POST -H "Content-Type:text/plain" --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  448  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  449  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  450  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  451  more makefile 
+  452  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @shed.sh http://_system:SYS@sandbox.healthshare.us:57772/shed/githook
+  453  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @shed.sh http://sandbox.healthshare.us:57772/gitshed/githook
+  454  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/githook
+  455  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  456  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  457  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  458  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  459  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  460  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  461  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  462  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  463  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  464  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  465  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  466  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  467  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  468  vim makefile
+  469  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  470  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook
+  471  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook/
+  472  curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" --data-binary @makefile http://sandbox.healthshare.us:57772/gitshed/hook/foo
+  473  telnet sandbox.healthshare.us 57723
+  474  telnet sandbox.healthshare.us 57723
+  475  curl -X GET http://sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls
+  476  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls
+  477  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls?log=1
+  478  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls?log=1 | head
+  479  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls?log=1 
+  480  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls?log=1 
+  481  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/csp/healthshare/varian/varian.SampleRESTMonitor.cls?log=1 | more
+  482  sudo shutdown -r now
+  483  exit
+  484  brew install tmux
+  485  tmux
+  486  vim ~/.tmux.conf 
+  487  tmux
+  488  vim jsoncls.HTTPService.cls 
+  489  exit
+  490  vim jsoncls.HTTPService.cls 
+  491  exit
+  492   cd work/json-cls/
+  493  tmux
+  494  exit
+  495  vim jsoncls.HTTPService.cls 
+  496  EXIT
+  497  exit
+  498  exit
+  499  shed config
+  500  shed -ns %25sys post jsoncls.HTTPService.cls 
+  501  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  502  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  503  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  504  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  505  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  506  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  507  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  508  ls
+  509  ls test
+  510  ls -l test
+  511  ls -l
+  512  cd test
+  513  ls
+  514  cd ..
+  515  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  516  curl -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls
+  517  curl -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls
+  518  curl -X GET http://_system:SYS@sandbox.healthshare.us:57772/shed/man
+  519  curl -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls
+  520  curl -v -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls
+  521  curl -v -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls | more
+  522  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  523  curl -v -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls | more
+  524  curl -v -X Get --header cosmic-action=getLastError http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/getLastError | more
+  525  curl -v -X Get http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/getLastError | more
+  526  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  527  curl -v -X Get http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/getLastError | more
+  528* curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song[A
+  529  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  530  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song
+  531  curl -v -X Get http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/getLastError | more
+  532  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  533  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song
+  534  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  535  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song
+  536  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  537  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song
+  538  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  539  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  540  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  541  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  542  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  543  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  544  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  545  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create --header cosmic-donot-fireandforget http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  546  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create --header cosmic-donot-fireandforget=1 http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  547  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  548  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create --header cosmic-donot-fireandforget=1 http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  549  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  550  curl -v -X POST --data-binary @dub.song.js --header cosmic-action=create --header cosmic-donot-fireandforget=1 http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  551  history | grep curl | grep header
+  552  curl -v -X POST --data-binary @dub.song.js --header "cosmic-action:create" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  553  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  554  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  555  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  556  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  557  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  558  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  559  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  560  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  561  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  562  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  563  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  564  shed -ns %25sys post jsoncls.HTTPService.cls | more
+  565  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  566  shed -ns %25sys post jsoncls.Generator.cls 
+  567  shed -ns %25sys post jsoncls.JSONable.cls 
+  568  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  569  shed -ns %25sys post jsoncls.Generator.cls 
+  570  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  571  shed -ns %25sys post jsoncls.HTTPService.cls 
+  572  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  573  shed -ns %25sys post jsoncls.HTTPService.cls 
+  574  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  575  shed -ns %25sys post jsoncls.Generator.cls 
+  576  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  577  shed -ns %25sys post jsoncls.Generator.cls 
+  578  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  579  shed -ns %25sys post jsoncls.Generator.cls 
+  580  shed -ns %25sys post jsoncls.HTTPService.cls 
+  581  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  582  shed -ns %25sys post jsoncls.HTTPService.cls 
+  583  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  584  shed -ns %25sys post jsoncls.HTTPService.cls 
+  585  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  586  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" --header "content-type:application/json" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  587  curl -v -X POST --data-binary @dub.song.js --header "x-cosmic-action:create" --header "x-cosmic-debug:1" --header "x-cosmic-donot-fireandforget:1" --header "content-type:application/json" http://_system:SYS@sandbox.healthshare.us:57772/jsoncls/dub.Song | more
+  588  history
+  589  history > local.history

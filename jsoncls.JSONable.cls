@@ -33,7 +33,6 @@ ClassMethod ImportFromStream(stream As %Stream.Object,Output sc As %Status) As j
 
 Method ToJSON() As %String
 {
-    write "this=",$this,!
     set stream=##class(%Stream.TmpCharacter).%New()
     set sc=##class(%ZEN.Auxiliary.jsonProvider).%WriteJSONStreamFromObject(stream,$this)
     set json=""
