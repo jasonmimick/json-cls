@@ -1,4 +1,4 @@
-Class jsoncls.HTTPService Extends %CSP.REST
+Class cosmic.HTTPService Extends %CSP.REST
 {
 XData UrlMap 
 {
@@ -75,10 +75,10 @@ ClassMethod post(className As %String) As %Status
     do ..readHeaders("postObject")
     // Do the action, in-process if '^||fireForget
     if ( '^||fireForget ) {
-      job $classmethod("jsoncls.HTTPService",^||action, className, ^||headers,%request)
+      job $classmethod("cosmic.HTTPService",^||action, className, ^||headers,%request)
       return $$$OK
     } else {
-      return $classmethod("jsoncls.HTTPService",^||action, className, ^||headers,.%request)
+      return $classmethod("cosmic.HTTPService",^||action, className, ^||headers,.%request)
     }
   } catch (error) {
     do ..logError(error)
@@ -115,7 +115,7 @@ ClassMethod create(className As %String,headers,request) As %Status
     do ..debug("cosmic DEBUG ON",$c(13,10),"className=",className," Content-Size=",request.Content.Size)
     set jStream=%request.Content
     //zw jStream
-    do ##class(jsoncls.Generator).Generate(className,.jStream)
+    do ##class(cosmic.Generator).Generate(className,.jStream)
     set package=$piece(className,".",1,$length(className,".")-1)
     do ..debug("Package=",package)
     set flags="ck-d"
@@ -180,7 +180,7 @@ ClassMethod logError(error) [ Private ]
   } 
 }
 
-Parameter CSPAPP = "/jsoncls";
+Parameter CSPAPP = "/cosmic";
 
 /// Dummy method - used to automagically create a CSP app to host
 /// this service

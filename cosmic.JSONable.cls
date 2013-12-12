@@ -1,6 +1,6 @@
-/// Base class for generated jsoncls classes.
+/// Base class for generated cosmic classes.
 /// 
-Class jsoncls.JSONable Extends (%RegisteredObject) {
+Class cosmic.JSONable Extends (%RegisteredObject) {
 
 Method %OnNew(initvalue As %String) As %Status
 {
@@ -11,7 +11,7 @@ Method %OnNew(initvalue As %String) As %Status
 }
 
 
-ClassMethod ImportFromString(json As %String,Output sc As %Status) As jsoncls.JSONable
+ClassMethod ImportFromString(json As %String,Output sc As %Status) As cosmic.JSONable
 {
   try {
     set sc=$$$OK
@@ -21,7 +21,7 @@ ClassMethod ImportFromString(json As %String,Output sc As %Status) As jsoncls.JS
   }
 }
 
-ClassMethod ImportFromStream(stream As %Stream.Object,Output sc As %Status) As jsoncls.JSONable
+ClassMethod ImportFromStream(stream As %Stream.Object,Output sc As %Status) As cosmic.JSONable
 {
   try {
     set sc=$$$OK
@@ -45,7 +45,7 @@ Method ToJSON() As %String
 
 }
 
-ClassMethod FromJSON(json As %String) As jsoncls.JSONable   
+ClassMethod FromJSON(json As %String) As cosmic.JSONable   
 {
     $$$THROWONERROR(sc,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(json,..%ClassName(1),.obj,1))
     return obj

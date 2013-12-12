@@ -1,4 +1,4 @@
-Class jsoncls.Generator Extends %RegisteredObject 
+Class cosmic.Generator Extends %RegisteredObject 
 {
     
 ClassMethod Generate(className As %String, jsonSource as %RegisteredObject) 
@@ -12,7 +12,7 @@ ClassMethod Generate(className As %String, jsonSource as %RegisteredObject)
 
 ClassMethod exp(message as %String) [ Private ]
 {
-    return ##class(%Exception.General).%New("jsoncls",,,message)
+    return ##class(%Exception.General).%New("cosmic",,,message)
 }
 
 /// Internal implementation
@@ -63,7 +63,7 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
     	}
 	} while (0) 
     set cdef=##class(%Dictionary.ClassDefinition).%New(className)
-    set:'nested cdef.Super = "jsoncls.JSONable,%Persistent"   //Ens.Request"
+    set:'nested cdef.Super = "cosmic.JSONable,%Persistent"   //Ens.Request"
     set:nested cdef.Super = "%SerialObject"
     write:..dbg() "cdef.Super=",cdef.Super,!
     set cdef.ProcedureBlock = 1
@@ -133,8 +133,8 @@ ClassMethod test1()
     set ^foofee=0
     set j="{ ""name"" : ""John"", ""age"" : 55 }"
     write j,!
-    do ..Generate("jsoncls.test.one",j)   
-    set sc=##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(j,"jsoncls.test.one",.jone,1)
+    do ..Generate("cosmic.test.one",j)   
+    set sc=##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(j,"cosmic.test.one",.jone,1)
     zw jone
 
     set stream=##class(%Stream.TmpCharacter).%New()
@@ -142,23 +142,23 @@ ClassMethod test1()
     do stream.OutputToDevice()
 
     set j="{ ""nest"" : { ""one"" : 1, ""two"" : 2 } }"
-    do ..Generate("jsoncls.test.two",j)   
+    do ..Generate("cosmic.test.two",j)   
 
-    set j2=##class(jsoncls.test.two).FromJSON(j)
+    set j2=##class(cosmic.test.two).FromJSON(j)
     zw j2
     write j2.ToJSON()
     
     set j="{ ""arrays"" : [ ""They"", ""really"", ""rock"", 100 ]}"
-    do ..Generate("jsoncls.test.three",j)
-    set j3=##class(jsoncls.test.three).FromJSON(j)
+    do ..Generate("cosmic.test.three",j)
+    set j3=##class(cosmic.test.three).FromJSON(j)
     zw j3
     write !,j3.ToJSON(),!
 
     set ^foofee=1
     set j="{ ""nestArray"" : [ { ""Color"" : ""Red"", ""Name"" : ""Cardinal"" }, { ""amount"" :""55"" }, { ""q"" : ""Will this work?""} ] }"
     set ^j=j
-    do ..Generate("jsoncls.test.four",j)
-    set j4=##class(jsoncls.test.four).FromJSON(j)
+    do ..Generate("cosmic.test.four",j)
+    set j4=##class(cosmic.test.four).FromJSON(j)
     zw j4
     set na=j4.nestArray
     zw na
