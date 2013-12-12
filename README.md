@@ -21,18 +21,17 @@ Now go off and build data transforms against your JSON generated classes!
 Even better, cosmic supports a REST endpoint, which allows you to generate classes and 
 post/get data from the system.
 
-'''
-curl -X POST --header "content-type:application/json" --header "x-cosmic-action:create" --header "x-cosmic-namespace:user" -d "{ \"message\" : \"Hello World!\" }" http://_user_:_pwd_@server:57772/cosmic/demo.message
-'''
+`curl -X POST --header "content-type:application/json" --header "x-cosmic-action:create" --header "x-cosmic-namespace:user" -d "{ \"message\" : \"Hello World!\" }" http://_user_:_pwd_@server:57772/cosmic/demo.message
+`
 
 Would generate a Caché class called 'demo.message' with one %String property called message.
 Send that same post again, but remove the x-cosmic-action header and cosmic would store the JSON document.
 
 Queries work in a similar fashion.
 
-'''
+`
 curl -X GET --header "x-cosmic-namespace:user" http://_user_:_pwd_@server:57772/cosmic/demo.message?message[Hello
-'''
+`
 
 Will return all the documents where the message property contains "Hello".
 
