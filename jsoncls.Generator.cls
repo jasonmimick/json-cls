@@ -116,8 +116,14 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
 keepOnTruckin
         set prop=$order(proxyArray(prop))
     }
-    do cdef.%Save()
-    do $system.OBJ.Compile(cdef.Name,"ck-d")
+    if ( $data(^||ns ) ) {
+      new $namespace set $namespace=^||ns
+      do cdef.%Save()
+      do $system.OBJ.Compile(cdef.Name,"ck-d")
+    } else {
+      do cdef.%Save()
+      do $system.OBJ.Compile(cdef.Name,"ck-d")
+    }
 }
 
 ClassMethod test1() 

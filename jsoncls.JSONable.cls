@@ -25,9 +25,13 @@ ClassMethod ImportFromStream(stream As %Stream.Object,Output sc As %Status) As j
 {
   try {
     set sc=$$$OK
+    set json=""
+    do stream.Rewind()
+    while ( 'stream.AtEnd ) { set json=json_stream.Read() }
     return ..FromJSON(json)
   } catch error {
-    return error.AsStatus()
+    set sc=error.AsStatus()
+    return 0
   }
 }
 

@@ -17,6 +17,9 @@ Parameter FireForgetHeader= "HTTP_X_COSMIC_DONOT_FIREANDFORGET";
 
 Parameter SessionIdHeader = "HTTP_X_COSMIC_SESSION";
 Parameter SessionIdHeaderOut = "X_COSMIC_SESSION";
+
+Parameter NamespaceHeader = "HTTP_X_COSMIC_NAMESPACE";
+
 ClassMethod dbg() [ CodeMode = expression ] 
 {
   $get(^||debug)
@@ -49,10 +52,11 @@ ClassMethod readHeaders(defaultAction) [ Private ]
     set ^||fireForget=($get(%request.CgiEnvs(..#FireForgetHeader),0)'=0)
     set ^||sessionId=$get(%request.CgiEnvs(..#SessionIdHeader),..generateSessionId())
     do %response.SetHeader(..#SessionIdHeaderOut,^||sessionId)
+    set ^||ns=$get(%request.CgiEnvs(..#NamespaceHeader),$namespace)
     if ( "postObject,create" '[ ^||action ) {
       throw ..ex("Invalid ",..#ActionHeader," header ='",^||action,"'")
     }
-    set ^||headers=$listbuild(^||debug,^||action,^||fireForget,^||sessionId)
+    set ^||headers=$listbuild(^||debug,^||action,^||fireForget,^||sessionId,^||ns)
     set ^%cosmic("^||headers")=^||headers
 }
 
@@ -62,6 +66,7 @@ ClassMethod parseHeaders(headers) [ Private ]
   set ^||action=$list(headers,2)
   set ^||fireForget=$list(headers,3)
   set ^||sessionId=$list(headers,4)
+  set ^||ns=$list(headers,5)
 }
 
 ClassMethod post(className As %String) As %Status 
@@ -85,9 +90,11 @@ ClassMethod postObject(className As %String, headers, request) As %Status
 {
   try {
     do ..parseHeaders(headers)
+    new $namespace set $namespace=^||ns
     set ^foo($zts)=request
     set object=$classmethod(className,"ImportFromStream",request.Content,.sc)
     throw:$$$ISERR(sc) ##class(%Exception.StatusException).CreateFromStatus(sc)
+    //zw object
     set sc=object.%Save()
     throw:$$$ISERR(sc) ##class(%Exception.StatusException).CreateFromStatus(sc)
     if ( '^||fireForget ) {
@@ -113,6 +120,7 @@ ClassMethod create(className As %String,headers,request) As %Status
     do ..debug("Package=",package)
     set flags="ck-d"
     set:..dbg() flags="ckd"
+    new $namespace set $namespace=^||ns
     do $system.OBJ.CompilePackage(package,"ck-d")
     set sc=##class(%Compiler.UDL.TextServices).GetTextAsStream(,className,.clsStream)
     if ($$$ISERR(sc) ) {
