@@ -64,7 +64,7 @@ system.
 <pre>
 curl -X GET --header "x-cosmic-namespace:user" \
 			http://_user_:_pwd_@server:123/cosmic/mq/HelloEvent?http://me.com/listener
-<pre>
+</pre>
 
 Will register the endpoint 'http://me.com/listener' to get called when messages get posted to the 'HelloEvent' resource.
 
