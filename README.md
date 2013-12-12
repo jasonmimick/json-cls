@@ -1,6 +1,6 @@
 # cosmic
 
-## Generate Caché classes from json documents
+#### Generate and Integrate with Caché classes from json documents over HTTP
 
 Now you can effeciently use JSON documents within the Ensemble pipeline. 
 
@@ -31,6 +31,12 @@ curl -X POST --header "content-type:application/json" \
 
 Would generate a Caché class called 'demo.message' with one %String property called message.
 Send that same post again, but remove the x-cosmic-action header and cosmic would store the JSON document.
+
+By default, cosmic works in a fire-and-forget fashion. You can optionally run in an in-line mode by setting the 
+'x-cosmic-donot-fireandforget' HTTP header to 1. You can get errors with the /getErrors and /clearErrors endpoints.
+
+Each request will return a session id in the x-cosmic-session header. You should extract this and reuse across all your 
+calls. [Future - support transactions ]
 
 Queries work in a similar fashion.
 
