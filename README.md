@@ -21,17 +21,23 @@ Now go off and build data transforms against your JSON generated classes!
 Even better, cosmic supports a REST endpoint, which allows you to generate classes and 
 post/get data from the system.
 
-`curl -X POST --header "content-type:application/json" --header "x-cosmic-action:create" --header "x-cosmic-namespace:user" -d "{ \"message\" : \"Hello World!\" }" http://_user_:_pwd_@server:57772/cosmic/demo.message
-`
+<pre>
+curl -X POST --header "content-type:application/json" \
+			 --header "x-cosmic-action:create" \
+			 --header "x-cosmic-namespace:user" \
+		     -d "{ \"message\" : \"Hello World!\" }" \
+			 http://_user_:_pwd_@server:57772/cosmic/demo.message
+</pre>
 
 Would generate a Caché class called 'demo.message' with one %String property called message.
 Send that same post again, but remove the x-cosmic-action header and cosmic would store the JSON document.
 
 Queries work in a similar fashion.
 
-`
-curl -X GET --header "x-cosmic-namespace:user" http://_user_:_pwd_@server:57772/cosmic/demo.message?message[Hello
-`
+<pre>
+curl -X GET --header "x-cosmic-namespace:user" \
+	http://_user_:_pwd_@server:57772/cosmic/demo.message?message[Hello
+</pre>
 
 Will return all the documents where the message property contains "Hello".
 
@@ -46,6 +52,29 @@ Will return all the documents where the message property contains "Hello".
 |   ~	 | Like		    | ?city~San	 		|
 |   |	 | Or			| ?city~San|city~New|
 |   +	 | AND 		    | ?city~San+state=CA|
+
+
+### Message Queueing
+
+The cosmic REST endpoint also provides a way to send and receive messages to $system.Event resource.
+This allows you to integrate with Caché, Ensemble or HealthShare applications. You can post messages to 
+resources or provide callbacks to get invoked when messages are posted to resource from within the 
+system.
+
+<pre>
+curl -X GET --header "x-cosmic-namespace:user" \
+			http://_user_:_pwd_@server:123/cosmic/mq/HelloEvent?http://me.com/listener
+<pre>
+
+Will register the endpoint 'http://me.com/listener' to get called when messages get posted to the 'HelloEvent' resource.
+
+<pre>
+curl -X POST --header "x-cosmic-namespace:user" \
+			 -d "Some message, could be JSON too!" \
+			http://_user_:_pwd_@server:1234/cosmic/mq/HelloEvent
+</pre>
+
+Would post that message to the "HelloEvent" resource (creating it if needed).
 
 
 ## Installation
