@@ -22,7 +22,7 @@ Parameter NamespaceHeader = "HTTP_X_COSMIC_NAMESPACE";
 
 ClassMethod dbg() [ CodeMode = expression ] 
 {
-  $get(^||debug)
+  '$get(^||debug,0)
 }
 
 ClassMethod debug(message... as %String) {
@@ -110,11 +110,11 @@ ClassMethod postObject(className As %String, headers, request) As %Status
 ClassMethod create(className As %String,headers,request) As %Status
 {
   try {
-    //zw request
+    zw request
     do ..parseHeaders(headers)
     do ..debug("cosmic DEBUG ON",$c(13,10),"className=",className," Content-Size=",request.Content.Size)
     set jStream=%request.Content
-    zw jStream
+    //zw jStream
     do ##class(jsoncls.Generator).Generate(className,.jStream)
     set package=$piece(className,".",1,$length(className,".")-1)
     do ..debug("Package=",package)
@@ -187,8 +187,21 @@ Parameter CSPAPP = "/jsoncls";
 ClassMethod install() [ codemode = objectgenerator ]
 {
 	set cspapp=..#CSPAPP
-        set currentNamespace=$namespace
-        set $namespace="%SYS"
+    set currentNamespace=$namespace
+    set $namespace="%SYS"
+	// create (if needed) %ALL namespace and add this package
+	// to it - so it's available everywhere
+	if ( '##class(Config.Namespaces).Exists("%ALL") ) {
+		set properties("Globals")="CACHESYS"
+		$$$THROWONERROR(sc,##class(Config.Namespaces).Create("%ALL",.properties))
+		
+	} 		
+	set package=$piece(%class.Name,".",1,$length(%class.Name,".")-1)
+	set sc=##class(Config.MapPackages).Get("%ALL",package,.maps)
+	if ( '$data( maps("Database") ) ) {
+		set maps("Database")="CACHESYS"
+		$$$THROWONERROR(sc, ##class(Config.MapPackages).Create("%ALL",package,.maps))
+	}	
 	set appExists = ##class(Security.Applications).Exists(cspapp,.app,.status)
 	if ( appExists ) {
 		goto BootDone

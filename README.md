@@ -1,8 +1,9 @@
 # json-cls
 
-## Generate Caché classes from json documents.
-Now you can effeciently use JSON documents within the Ensemble pipeline. The generated classes can be used in request/response messages, business rules,
-or data transformation.
+## Generate Caché classes from json documents
+
+Now you can effeciently use JSON documents within the Ensemble pipeline. 
+The generated classes can be used in request/response messages, business rules, or data transformation.
 
 From a terminal session you can generate a class like this:
 

@@ -32,19 +32,14 @@ ClassMethod gen(className As %String, jsonSource as %RegisteredObject) [ Private
  } else {
      set jStream=jsonSource
  }
- zw jStream
- set foo=""
- do jStream.Rewind()
- while ( 'jStream.AtEnd ) { set foo = foo _ jStream.Read() }
- do jStream.Rewind()
- zw foo
+
  // Convert to %ZEN.proxyObject
  $$$THROWONERROR(sc,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(jStream,,.jP))
 
  // Generate class   
- zw jP
- do jP.%CopyToArray(.jA)
- zw jA
+ //zw jP
+ //do jP.%CopyToArray(.jA)
+ //zw jA
  do ..genCls(className,jP)
 
 }
@@ -60,16 +55,21 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
       zw proxyObject
     }
     do proxyObject.%CopyToArray(.proxyArray)
-    if ( $data(^oddDEF(className) ) ) {
-        do $system.OBJ.Delete( className,"-d" )
-    }
+	do {
+		new $namespace set $namespace=^||ns
+		if ( $data(^oddDEF(className) ) ) {
+
+        	do $system.OBJ.Delete( className,"-d" )
+    	}
+	} while (0) 
     set cdef=##class(%Dictionary.ClassDefinition).%New(className)
     set:'nested cdef.Super = "jsoncls.JSONable,%Persistent"   //Ens.Request"
     set:nested cdef.Super = "%SerialObject"
     write:..dbg() "cdef.Super=",cdef.Super,!
     set cdef.ProcedureBlock = 1
+	set cdef.ClassType="persistent"
     set prop=$order(proxyArray(""))
-    while ( prop'="" ) {
+	while ( prop'="" ) {
         set v=proxyArray(prop)
         set cp = ##class(%Dictionary.PropertyDefinition).%New()
         set cp.Name = prop
@@ -116,13 +116,15 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
 keepOnTruckin
         set prop=$order(proxyArray(prop))
     }
-    if ( $data(^||ns ) ) {
+    set compileFlags="ck-d"
+	set:($get(^||debug)) compileFlags="ckd"
+	if ( $data(^||ns ) ) {
       new $namespace set $namespace=^||ns
       do cdef.%Save()
-      do $system.OBJ.Compile(cdef.Name,"ck-d")
+      do $system.OBJ.Compile(cdef.Name,compileFlags)
     } else {
       do cdef.%Save()
-      do $system.OBJ.Compile(cdef.Name,"ck-d")
+      do $system.OBJ.Compile(cdef.Name,compileFlags)
     }
 }
 
