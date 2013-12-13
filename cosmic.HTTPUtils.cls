@@ -1,21 +1,20 @@
 class cosmic.HTTPUtils extends %RegisteredObject
 {
 
-classmethod post(url,data) 
-{
-}
 
 classmethod get(url)
 {
-	set req=..prepareRquest(url,.path)
-	do req.Get( path ) 	
+	set req=..prepareRequest(url,.path)
+	set sc=req.Get( path ) 	
 	if ( $isobject( req.HttpResponse.Data ) ) {
 		set response=""
-		while ( req.HttpResponse.Data.AtEnd ) {
+		while ( 'req.HttpResponse.Data.AtEnd ) {
 			set response=response_req.HttpResponse.Data.Read() 
 		}
+		write response
 		return response
 	} else {
+		zw req
 		return req.HttpResponse.Data
 	}
 	
@@ -29,11 +28,11 @@ classmethod post(url,message)
 	do req.Post(path)
 
 }
-classmethod prepareRequest(url,output path) as %Net.HTTPRequest
+classmethod prepareRequest(url,output path) as %Net.HttpRequest
 {
 	try {
-		set req=##class(%Net.HTTPRequest).%New()
-		set purl=##class(%New.URLParser).Parse(url)
+		set req=##class(%Net.HttpRequest).%New()
+		do ##class(%Net.URLParser).Parse(url,.purl)
 		set req.Server=purl("host")
 		if ( $zconvert(purl("scheme"),"l")="https" ) {
 			set req.Https=1
@@ -45,6 +44,7 @@ classmethod prepareRequest(url,output path) as %Net.HTTPRequest
 		set:$get( purl("username") ) req.Username = purl("username")
 		set:$get( purl("password") ) req.Password= purl("password")
 		set path=purl("path")
+		set:path="" path="/"
 		set:$l(purl("query")) path=path_"?"_purl("query")
 		return req
 	} catch error {
