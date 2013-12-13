@@ -95,7 +95,7 @@ Or, clone and load manually.
 * Arrays can't mix objects and regular types (string, numbers, etc).
 
 If you want to store a collection of strongly typed objects, then the array must contain consistency in the objects.
-That is, you can mix differnt objects in a list:
+That is, you can't mix different objects in a list:
 
 This will not work
 `{ "objects" : [ { "a" : "b" }, { "c" : "d" } ] }`
