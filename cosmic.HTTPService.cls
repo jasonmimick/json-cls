@@ -5,6 +5,8 @@ XData UrlMap
   <Routes>
     <Route Url="/getErrors" Method="GET" Call="getErrors" />
     <Route Url="/clearErrors" Method="GET" Call="clearErrors" />
+    <Route Url="/mq" Method="GET" Call="mqListen" />
+    <Route Url="/mq/:queue" Method="POST" Call="mqSendMessage" />
     <Route Url="/:className" Method="POST" Call="post" />
   </Routes>
 }
@@ -19,6 +21,19 @@ Parameter SessionIdHeader = "HTTP_X_COSMIC_SESSION";
 Parameter SessionIdHeaderOut = "X_COSMIC_SESSION";
 
 Parameter NamespaceHeader = "HTTP_X_COSMIC_NAMESPACE";
+
+Classmethod stringfromarray(byref array) as %String
+{
+	set string=""
+	for i=1:1:array { set string=string_array(i) }
+	return string
+}
+
+ClassMethod exp(message... as %String) [ Private ]
+{
+	do ..debug(message)
+    return ##class(%Exception.General).%New("cosmic",,,..stringfromarray(.message))
+}
 
 ClassMethod dbg() [ CodeMode = expression ] 
 {
@@ -178,6 +193,83 @@ ClassMethod logError(error) [ Private ]
       set e.message=error.DisplayString()
       do ##class(%ZEN.Auxiliary.jsonProvider).%ObjectToJSON(e)
   } 
+}
+
+Classmethod mqListen() As %Status
+{
+	try {
+    	do ..readHeaders("")
+		
+	} catch error {
+		do ..logError(error)
+		return error.AsStatus()
+	}
+	return $$$OK
+}
+
+Classmethod mqSendMessage(queue as %String) As %Status
+{
+	try {
+    	do ..readHeaders("")
+		// get the message and then based on fire-and-forget
+		// send it
+		if ( %request.Content.Size > 0 ) {
+			set message = ""
+			while ( '%request.Content.AtEnd ) {
+				set message = message _ %request.Content.Read()
+			}
+		} else {
+			// look in Data
+			set key=$order( %request.Data("") )
+			set message = %request.Data(key)
+		}
+		if (^||fireForget) {
+			job $classmethod("cosmic.HTTPService","sendMessage",queue,message)
+		} else {
+			do ..sendMessage(queue,message)
+		}
+	} catch error {
+		do ..logError(error)
+		return error.AsStatus()
+	}
+	return $$$OK
+}
+
+Classmethod sendMessage(channel,msg) [ Private ]
+{
+	set created='$system.Event.Create(channel) 
+	do ..debug("created channel='",channel,"'")
+	set ok=$system.Event.Signal(channel, msg)
+	if ('ok) {
+		do ..exp("error signalling channel=",channel," msg=",msg) 
+	}
+}
+
+/// Jobbed off deamon will listen on 
+/// a particular channel. When a message
+/// is received it will broadcast it to each
+/// endpoint in the $list stored in
+/// ^%cosmic.mq(channel)
+/// if ^%comsmic.mq(channel,"stop")=1
+/// then the job will exit
+Classmethod listenDeamon(channel) [ Private ]
+{
+	set timeout=$get(^%cosmic.mq.sys("timeout"),30)
+	set stop=$get(^%cosmic.mq(channel,"stop"),0)
+	while ( 'stop ) {
+			set signal=$system.Event.WaitMsg(channel,timeout)
+			set listeners=^%comsic.mq(channel)
+			for i=1:1:$listlength(listeners) {
+				do broadcast( $list(listeners,i), $list(signal,2) )
+			}
+			// check if we should shutdown
+			set stop=$get(^%cosmic.mq(channel,"stop"))
+	}
+}
+
+Classmethod broadcast(endpoint,message)
+{
+	do ##class(cosmic.HTTPUtils).post(endpoint,message)
 }
 
 Parameter CSPAPP = "/cosmic";
