@@ -5,8 +5,8 @@ XData UrlMap
   <Routes>
     <Route Url="/getErrors" Method="GET" Call="getErrors" />
     <Route Url="/clearErrors" Method="GET" Call="clearErrors" />
-    <Route Url="/mq" Method="GET" Call="mqListen" />
-    <Route Url="/mq/:queue" Method="POST" Call="mqSendMessage" />
+    <Route Url="/mq/:channel" Method="GET" Call="mqListen" />
+    <Route Url="/mq/:channel" Method="POST" Call="mqSendMessage" />
     <Route Url="/:className" Method="POST" Call="post" />
   </Routes>
 }
@@ -195,11 +195,16 @@ ClassMethod logError(error) [ Private ]
   } 
 }
 
-Classmethod mqListen() As %Status
+Classmethod mqListen(channel as %String) As %Status
 {
 	try {
     	do ..readHeaders("")
-		
+		// parse out the endpoint
+		// only works for GET so nn
+		// must be in request query
+		set pek=$order(%request.Data(""))
+		set pe=%request.Data(pek)
+		set ^%cosmic.mq(channel)=$get(^%cosmic.mq)_$listbuild(pe)
 	} catch error {
 		do ..logError(error)
 		return error.AsStatus()
@@ -267,6 +272,19 @@ Classmethod listenDeamon(channel) [ Private ]
 	}
 }
 
+ClassMethod mqListen()	As %Status
+{
+	try {
+	
+		
+		return $$$OK
+	} catch error {
+		do ..log(error)
+		return error.AsStatus()
+	}
+	
+	
+}
 Classmethod broadcast(endpoint,message)
 {
 	do ##class(cosmic.HTTPUtils).post(endpoint,message)
