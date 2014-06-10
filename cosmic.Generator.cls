@@ -56,6 +56,9 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
     }
     do proxyObject.%CopyToArray(.proxyArray)
 	do {
+		if ( '$data(^||ns) ) {
+			set ^||ns=$namespace
+		}
 		new $namespace set $namespace=^||ns
 		if ( $data(^oddDEF(className) ) ) {
 
