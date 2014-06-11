@@ -1,7 +1,7 @@
-Class cosmic.Generator Extends %RegisteredObject 
+Class cosmic.Generator Extends %RegisteredObject
 {
-    
-ClassMethod Generate(className As %String, jsonSource as %RegisteredObject) 
+
+ClassMethod Generate(className As %String, jsonSource As %RegisteredObject)
 {
     try {
         do ..gen(className, jsonSource)
@@ -10,25 +10,25 @@ ClassMethod Generate(className As %String, jsonSource as %RegisteredObject)
     }
 }
 
-ClassMethod exp(message as %String) [ Private ]
+ClassMethod exp(message As %String) [ Private ]
 {
     return ##class(%Exception.General).%New("cosmic",,,message)
 }
 
 /// Internal implementation
-///
-ClassMethod gen(className As %String, jsonSource as %RegisteredObject) [ Private ] 
+/// 
+ClassMethod gen(className As %String, jsonSource As %RegisteredObject) [ Private ]
 {
- set jStream = "" 
+ set jStream = ""
  // Normalize source to some %Stream.Object
  if ( '$isobject(jsonSource) ) {    // just a string
     set jStream = ##class(%Stream.TmpCharacter).%New()
-    do jStream.Write( jsonSource ) 
+    do jStream.Write( jsonSource )
     do jStream.Rewind()
 
- } 
+ }
  if ( $isobject(jsonSource) && 'jsonSource.%Extends("%Stream.Object") ) {   // hmm...
-    throw ..exp("Unable to process jsonSource, must be a String or some %Stream object") 
+    throw ..exp("Unable to process jsonSource, must be a String or some %Stream object")
  } else {
      set jStream=jsonSource
  }
@@ -36,46 +36,71 @@ ClassMethod gen(className As %String, jsonSource as %RegisteredObject) [ Private
  // Convert to %ZEN.proxyObject
  $$$THROWONERROR(sc,##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(jStream,,.jP))
 
- // Generate class   
+ // Generate class
  //zw jP
  //do jP.%CopyToArray(.jA)
  //zw jA
  do ..genCls(className,jP)
-
 }
 
-ClassMethod dbg() [ codemode = expression ] 
+ClassMethod dbg() [ CodeMode = expression ]
 {
-  $get(^||debug)
+$get(^||debug)
 }
-ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0) [ Private ]
+
+/// Remove any forbidden names in a class - name
+ClassMethod sanitizeClassName(className As %String) As %String
 {
+	set cn=$translate(className,"_","")
+	set cn=$translate(cn,"-","")
+	return cn
+}
+
+ClassMethod sanitizePropertyName(propertyName As %String) As %String
+{
+	set pn=$translate(propertyName,"_","")
+	return pn
+}
+
+ClassMethod genCls(className As %String, proxyObject As %ZEN.proxyObject, nested = 0) [ Private ]
+{
+	set className=..sanitizeClassName(className)
     if ( ..dbg() ) {
       Write "genCls className=",className,!
       zw proxyObject
+      break:(proxyObject="")
     }
     do proxyObject.%CopyToArray(.proxyArray)
+    zw proxyArray
+    //break
 	do {
-		if ( '$data(^||ns) ) {
-			set ^||ns=$namespace
+		if ( '$data(^||ns)) {
+			set ^||ns = $namespace
 		}
 		new $namespace set $namespace=^||ns
 		if ( $data(^oddDEF(className) ) ) {
 
         	do $system.OBJ.Delete( className,"-d" )
     	}
-	} while (0) 
+	} while (0)
     set cdef=##class(%Dictionary.ClassDefinition).%New(className)
     set:'nested cdef.Super = "cosmic.JSONable,%Persistent"   //Ens.Request"
     set:nested cdef.Super = "%SerialObject"
     write:..dbg() "cdef.Super=",cdef.Super,!
     set cdef.ProcedureBlock = 1
-	set cdef.ClassType="persistent"
+	set:'nested cdef.ClassType="persistent"
     set prop=$order(proxyArray(""))
 	while ( prop'="" ) {
+		
         set v=proxyArray(prop)
         set cp = ##class(%Dictionary.PropertyDefinition).%New()
-        set cp.Name = prop
+        set cleanProp = ..sanitizePropertyName( prop )
+        if ( $data(vp(cleanProp)) ) {	// we already hit this prop - need to gen a new name
+			goto keepOnTruckin				// TODO - support same names - 
+        } 	
+        set vp(cleanProp)=1
+               
+        set cp.Name = cleanProp
         if ( '$isobject(v) ) {
             if ( v?.N ) {
                 set cp.Type="%Integer"
@@ -85,11 +110,11 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
             do cdef.Properties.Insert(cp)
             goto keepOnTruckin
         }
-        if ( v.%Extends("%ZEN.proxyObject") ) { 
+        if ( v.%Extends("%ZEN.proxyObject") ) {
             // generae a class for this type
             // add a property to this class for that type
             do ..genCls(className_"."_prop, v, 1 )
-            set cp.Type = className_"."_prop
+            set cp.Type = className_"."_cleanProp
             do cdef.Properties.Insert(cp)
             goto keepOnTruckin
         }
@@ -97,22 +122,25 @@ ClassMethod genCls(className As %String,proxyObject as %ZEN.proxyObject,nested=0
             set cp.Type="%Library.DataType"
             set cp.Collection = "list"
             do cdef.Properties.Insert(cp)
-            goto keepOnTruckin    
+            goto keepOnTruckin
         }
 
         if ( v.%Extends("%Library.ListOfObjects") ) {
             // Here we expect a consitent object definition
             // Grab the first one in the list and generate the type
-            set lt=v.GetAt(1)
-            do ..genCls(className_"."_prop, lt, 1 )
-
-            set cp.Type=className_"."_prop
+            if ( v.Count() > 0 ) {
+	            set lt=v.GetAt(1)
+    	        do ..genCls(className_"."_prop, lt, 1 )
+            	set cp.Type=className_"."_cleanProp
+            } else {
+	            set cp.Type = "%Library.ListOfObjects"
+            }
             set cp.Collection = "list"
             do cdef.Properties.Insert(cp)
-            goto keepOnTruckin    
- 
+            goto keepOnTruckin
+
         }
-        // 1. Simple value - support String/Integer        
+        // 1. Simple value - support String/Integer
         // 2. Array of objects
         // 3. Array of simple types
         // 4. Nested Object?
@@ -120,23 +148,26 @@ keepOnTruckin
         set prop=$order(proxyArray(prop))
     }
     set compileFlags="ck-d"
-	set:($get(^||debug)) compileFlags="ckd"
+	set:($get(^||debug)) compileFlags="ckdbr"
 	if ( $data(^||ns ) ) {
       new $namespace set $namespace=^||ns
-      do cdef.%Save()
-      do $system.OBJ.Compile(cdef.Name,compileFlags)
+      do cdef.%Save(1)
+      set sc=$system.OBJ.Compile(cdef.Name,compileFlags)
+      break:$$$ISERR(sc)
     } else {
-      do cdef.%Save()
-      do $system.OBJ.Compile(cdef.Name,compileFlags)
+      do cdef.%Save(1)
+      set sc=$system.OBJ.Compile(cdef.Name,compileFlags)
+    	break:$$$ISERR(sc)
     }
 }
 
-ClassMethod test1() 
+ClassMethod test1()
 {
     set ^foofee=0
     set j="{ ""name"" : ""John"", ""age"" : 55 }"
     write j,!
-    do ..Generate("cosmic.test.one",j)   
+    
+    do ..Generate("cosmic.test.one",j)
     set sc=##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(j,"cosmic.test.one",.jone,1)
     zw jone
 
@@ -145,12 +176,12 @@ ClassMethod test1()
     do stream.OutputToDevice()
 
     set j="{ ""nest"" : { ""one"" : 1, ""two"" : 2 } }"
-    do ..Generate("cosmic.test.two",j)   
+    do ..Generate("cosmic.test.two",j)
 
     set j2=##class(cosmic.test.two).FromJSON(j)
     zw j2
     write j2.ToJSON()
-    
+
     set j="{ ""arrays"" : [ ""They"", ""really"", ""rock"", 100 ]}"
     do ..Generate("cosmic.test.three",j)
     set j3=##class(cosmic.test.three).FromJSON(j)
@@ -171,7 +202,7 @@ ClassMethod test1()
     }
 
     write !,j4.ToJSON(),!
+}
 
 }
-    
-}
+
